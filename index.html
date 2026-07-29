@@ -19,6 +19,7 @@
     --ink:#1E1B2E;
     --white:#FFFFFF;
     --gold:#FACC15;
+    --blue-light:#93C5FD;
     --spring:cubic-bezier(.34,1.56,.64,1);
   }
   *{box-sizing:border-box;}
@@ -261,6 +262,7 @@
     border:6px solid var(--white);
   }
   .trio .avatar.host{ border-color:var(--gold); }
+  .trio .avatar.join{ border-color:var(--blue-light); }
   /* tag sits below each avatar, in normal flow, so it always stays put
      relative to the avatar it belongs to and never overlaps anything */
   .avatar-wrap, .plus-wrap{ display:flex; flex-direction:column; align-items:center; gap:clamp(10px,1.6vh,18px); }
@@ -341,7 +343,7 @@
               <div class="host-tag placeholder">spacer</div>
             </div>
             <div class="avatar-wrap">
-              <div class="avatar pop" style="--rot:8deg; animation-delay:.42s">🧑‍🦱</div>
+              <div class="avatar join pop" style="--rot:8deg; animation-delay:.42s">🧑‍🦱</div>
               <div class="host-tag join pop" style="animation-delay:.48s">🤝 Friend</div>
             </div>
             <div class="plus-wrap">
@@ -349,7 +351,7 @@
               <div class="host-tag placeholder">spacer</div>
             </div>
             <div class="avatar-wrap">
-              <div class="avatar pop" style="--rot:-6deg; animation-delay:.54s">🧑‍🦳</div>
+              <div class="avatar join pop" style="--rot:-6deg; animation-delay:.54s">🧑‍🦳</div>
               <div class="host-tag join pop" style="animation-delay:.6s">🤝 Friend</div>
             </div>
           </div>
