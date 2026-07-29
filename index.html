@@ -95,6 +95,14 @@
     flex:0 0 auto;
   }
   h1.title.left{ text-align:left; }
+  /* small looping wiggle on the headline text - lives on an inner span so it
+     never competes with the h1's own one-shot entrance (.pop) animation */
+  .title-inner{ display:inline-block; animation:titleWiggle 3.2s ease-in-out 1s infinite; }
+  @keyframes titleWiggle{
+    0%,100%{ transform:rotate(0deg); }
+    25%{ transform:rotate(-1.4deg); }
+    75%{ transform:rotate(1.4deg); }
+  }
   .badge.big{ font-size:clamp(32px,3.8vw,50px); padding:14px 36px; }
   /* ---- thirds layout: phone(s) get a dedicated column, text fills the rest ----
      flex-grow ratios (not percentage flex-basis) so `gap` never causes overflow. */
@@ -124,7 +132,7 @@
     box-shadow:0 6px 14px rgba(124,58,237,0.28);
   }
   .phone-cap{
-    font-weight:800; color:var(--purple-deep); text-align:left;
+    font-weight:800; color:var(--purple-deep); text-align:center;
     font-size:clamp(20px,2.2vw,30px); line-height:1.22; max-width:230px;
   }
   .third-text-mid{
@@ -133,7 +141,7 @@
   }
   .bullets{
     display:flex; flex-direction:column; gap:clamp(28px,5.4vh,64px);
-    text-align:left; width:100%;
+    text-align:center; width:100%;
   }
   .bullets .b{ display:flex; align-items:flex-start; gap:22px; }
   .bullets .b .num{
@@ -145,7 +153,7 @@
   }
   .bullets .b .txt{
     font-weight:700; font-size:clamp(34px,4vw,58px); color:var(--purple-deep);
-    line-height:1.2; padding-top:3px; text-align:left;
+    line-height:1.2; padding-top:3px; text-align:center;
   }
   .bullets .b .txt em{ font-style:normal; color:var(--orange-deep); font-weight:900; }
   .bullets .b .txt em.blue{ color:var(--blue-deep); }
@@ -298,7 +306,7 @@
   <!-- Slide 1: Group of 3 -->
   <section class="slide" id="slide-1">
     <div class="badge pop">Step 1</div>
-    <h1 class="title pop" style="animation-delay:.1s; margin-top:2.6vh;">Find Your Group of 3</h1>
+    <h1 class="title pop" style="animation-delay:.1s; margin-top:2.6vh;"><span class="title-inner">Find Your Group of 3</span></h1>
     <div class="thirds">
       <div class="third-visual auto">
         <div class="trio">
@@ -333,7 +341,7 @@
       </div>
       <div class="third-text centered">
         <div class="badge big pop">Step 2</div>
-        <h1 class="title pop" style="animation-delay:.1s">Open the App</h1>
+        <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">Open the App</span></h1>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Open the <em>Sambandh</em> app on your phone</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Look for the colorful banner on your home screen</div></div>
@@ -351,7 +359,7 @@
       </div>
       <div class="third-text-mid">
         <div class="badge pop">Step 3</div>
-        <h1 class="title pop" style="animation-delay:.1s">Host or Join a Game</h1>
+        <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">Host or Join a Game</span></h1>
         <div class="bullets compact">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">📤</div><div class="txt"><em>Hosting?</em> Share your code</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">🔑</div><div class="txt"><em class="blue">Joining?</em> Enter their code</div></div>
@@ -372,7 +380,7 @@
       </div>
       <div class="third-text centered">
         <div class="badge big pop">Step 4</div>
-        <h1 class="title pop" style="animation-delay:.1s">Everyone Taps <em style="color:var(--orange-deep); font-style:normal;">"I'm Ready"</em></h1>
+        <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">Everyone Taps <em style="color:var(--orange-deep); font-style:normal;">"I'm Ready"</em></span></h1>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Tap <em>"I'm Ready"</em> when you're set</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Wait for all <em>3 players</em> to be ready</div></div>
@@ -390,7 +398,7 @@
       </div>
       <div class="third-text centered">
         <div class="badge big pop">Step 5</div>
-        <h1 class="title pop" style="animation-delay:.1s">Break the Ice</h1>
+        <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">Break the Ice</span></h1>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Everyone gets the <em>same fun question</em></div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Take turns sharing your answer out loud</div></div>
@@ -417,7 +425,7 @@
       </div>
       <div class="third-text quarter centered">
         <div class="badge pop">Step 6</div>
-        <h1 class="title pop" style="animation-delay:.1s">Play Your Game!</h1>
+        <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">Play Your Game!</span></h1>
       </div>
     </div>
   </section>
@@ -431,7 +439,7 @@
       </div>
       <div class="third-text centered">
         <div class="badge big pop">Step 7</div>
-        <h1 class="title pop" style="animation-delay:.1s">See Who Won</h1>
+        <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">See Who Won</span></h1>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">See the final scores and the winner</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Tap <em>"Back to home"</em> when you're done</div></div>
