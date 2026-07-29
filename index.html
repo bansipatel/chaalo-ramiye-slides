@@ -249,28 +249,29 @@
   .cta-row .l1{ font-weight:700; color:#50241F; font-size:clamp(20px,2.3vw,27px); }
   .cta-row .l2{ font-weight:900; color:#941E05; font-size:clamp(26px,2.9vw,36px); }
   /* ---- group of 3 slide ---- */
-  .trio{ display:flex; flex-direction:column; align-items:center; gap:clamp(30px,4.2vh,50px); }
-  .trio-row{ display:flex; align-items:center; justify-content:center; gap:clamp(18px,3vw,42px); }
+  .trio{ display:flex; flex-direction:column; align-items:center; gap:clamp(20px,3vh,40px); }
+  .trio-row{ display:flex; align-items:center; justify-content:center; gap:clamp(12px,1.8vw,28px); }
   .trio .avatar{
-    width:clamp(140px,24vh,300px); height:clamp(140px,24vh,300px);
+    width:clamp(105px,17vh,210px); height:clamp(105px,17vh,210px);
     border-radius:50%;
     background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
     display:flex;align-items:center;justify-content:center;
-    font-size:clamp(70px,11.5vh,145px);
+    font-size:clamp(52px,8.2vh,100px);
     box-shadow:0 14px 26px rgba(124,58,237,0.3);
-    border:7px solid var(--white);
+    border:6px solid var(--white);
   }
   .trio .avatar.host{ border-color:var(--gold); }
-  /* badge floats above the avatar via absolute position, so it never
-     disturbs the row's normal flex alignment/height */
-  .avatar-wrap{ position:relative; display:flex; }
+  /* tag sits below each avatar, in normal flow, so it always stays put
+     relative to the avatar it belongs to and never overlaps anything */
+  .avatar-wrap, .plus-wrap{ display:flex; flex-direction:column; align-items:center; gap:clamp(10px,1.6vh,18px); }
   .host-tag{
-    position:absolute; top:0; left:50%; transform:translate(-50%, calc(-100% - 12px));
-    font-weight:900; font-size:clamp(15px,1.8vw,22px); color:var(--white); white-space:nowrap;
+    font-weight:900; font-size:clamp(15px,1.7vw,21px); color:var(--white); white-space:nowrap;
     background:linear-gradient(135deg, var(--orange) 0%, var(--orange-deep) 100%);
     padding:6px 18px; border-radius:999px; box-shadow:0 8px 16px rgba(249,115,22,0.32);
   }
-  .trio .plus{ font-size:clamp(46px,7.4vh,88px); font-weight:900; color:var(--purple-deep); }
+  .host-tag.join{ background:var(--blue-deep); box-shadow:0 8px 16px rgba(37,99,235,0.32); }
+  .host-tag.placeholder{ visibility:hidden; }
+  .trio .plus{ font-size:clamp(36px,6vh,70px); font-weight:900; color:var(--purple-deep); }
   .trio .x3{ font-size:clamp(28px,4vh,44px); font-weight:900; color:var(--orange-deep); letter-spacing:1.5px; }
   /* ---- fullscreen button ---- */
   #fsBtn{
@@ -332,13 +333,25 @@
           <div class="x3 pop" style="animation-delay:.2s">⭐ EXACTLY 3 PLAYERS</div>
           <div class="trio-row">
             <div class="avatar-wrap">
-              <div class="host-tag pop" style="animation-delay:.3s">👑 Host</div>
               <div class="avatar host pop" style="--rot:-10deg; animation-delay:.3s">🧑</div>
+              <div class="host-tag pop" style="animation-delay:.36s">👑 Host</div>
             </div>
-            <div class="plus pop" style="animation-delay:.42s">+</div>
-            <div class="avatar pop" style="--rot:8deg; animation-delay:.42s">🧑‍🦱</div>
-            <div class="plus pop" style="animation-delay:.54s">+</div>
-            <div class="avatar pop" style="--rot:-6deg; animation-delay:.54s">🧑‍🦳</div>
+            <div class="plus-wrap">
+              <div class="plus pop" style="animation-delay:.42s">+</div>
+              <div class="host-tag placeholder">spacer</div>
+            </div>
+            <div class="avatar-wrap">
+              <div class="avatar pop" style="--rot:8deg; animation-delay:.42s">🧑‍🦱</div>
+              <div class="host-tag join pop" style="animation-delay:.48s">🤝 Friend</div>
+            </div>
+            <div class="plus-wrap">
+              <div class="plus pop" style="animation-delay:.54s">+</div>
+              <div class="host-tag placeholder">spacer</div>
+            </div>
+            <div class="avatar-wrap">
+              <div class="avatar pop" style="--rot:-6deg; animation-delay:.54s">🧑‍🦳</div>
+              <div class="host-tag join pop" style="animation-delay:.6s">🤝 Friend</div>
+            </div>
           </div>
         </div>
       </div>
