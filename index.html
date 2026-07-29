@@ -74,9 +74,9 @@
     background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
     color:var(--white);
     font-weight:800;
-    font-size:clamp(22px,2.6vw,34px);
+    font-size:clamp(28px,3.3vw,44px);
     letter-spacing:1.5px;
-    padding:10px 28px;
+    padding:12px 32px;
     border-radius:999px;
     box-shadow:0 8px 20px rgba(124,58,237,0.28);
     margin-bottom:0.7vh;
@@ -106,9 +106,10 @@
   }
   .third-visual.auto{ flex:0 0 auto; }
   .third-text{
-    flex:2 1 0; display:flex; flex-direction:column; align-items:flex-start; justify-content:center;
+    flex:2 1 0; display:flex; flex-direction:column; align-items:flex-start; justify-content:space-evenly;
     min-width:0;
   }
+  .third-text.quarter{ flex:1 1 0; }
   .third-text-mid{
     flex:1 1 0; display:flex; flex-direction:column; align-items:center; justify-content:center;
     min-width:0; text-align:center;
@@ -126,20 +127,20 @@
     box-shadow:0 6px 14px rgba(124,58,237,0.28); margin-top:1px;
   }
   .bullets .b .txt{
-    font-weight:700; font-size:clamp(30px,3.6vw,50px); color:var(--purple-deep);
-    line-height:1.22; padding-top:3px; text-align:left;
+    font-weight:700; font-size:clamp(34px,4vw,58px); color:var(--purple-deep);
+    line-height:1.2; padding-top:3px; text-align:left;
   }
   .bullets .b .txt em{ font-style:normal; color:var(--orange-deep); font-weight:900; }
   .bullets .b .txt em.blue{ color:var(--blue-deep); }
   /* narrower middle-column variant (Start-or-Join slide) so long phrases don't wrap to 3 lines */
-  .bullets.compact{ gap:clamp(20px,3.6vh,44px); }
-  .bullets.compact .b .num{ width:clamp(38px,3.6vw,48px); height:clamp(38px,3.6vw,48px); font-size:clamp(16px,1.6vw,20px); }
-  .bullets.compact .b .txt{ font-size:clamp(22px,2.6vw,32px); line-height:1.24; }
+  .bullets.compact{ gap:clamp(22px,4vh,48px); }
+  .bullets.compact .b .num{ width:clamp(42px,4vw,54px); height:clamp(42px,4vw,54px); font-size:clamp(18px,1.8vw,22px); }
+  .bullets.compact .b .txt{ font-size:clamp(26px,3vw,40px); line-height:1.22; }
 
   /* ---- phone frame (height-driven so it always fits the viewport) ---- */
   .phone{
     position:relative;
-    height:clamp(360px,90vh,1200px);
+    height:clamp(380px,93vh,1260px);
     width:auto;
     aspect-ratio:1320/2868;
     border-radius:9%/4.2%;
@@ -151,7 +152,7 @@
   .phone img{
     width:100%;height:100%;object-fit:cover;display:block;
   }
-  .phone.trio{ height:clamp(260px,56vh,620px); }
+  .phone.quarter{ height:clamp(320px,80vh,900px); }
   /* ---- highlight ping ---- */
   .ping{
     position:absolute;
@@ -207,11 +208,12 @@
     border:1px solid rgba(124,58,237,0.18);
   }
   .cta-row{
-    display:flex; flex-direction:column; align-items:center; gap:5px; margin-top:clamp(10px,1.6vh,18px);
+    display:flex; flex-direction:column; align-items:center; gap:7px;
+    margin-top:clamp(10px,1.6vh,20px); align-self:center; text-align:center;
   }
-  .cta-row img{ width:clamp(50px,5vw,66px); height:clamp(50px,5vw,66px); border-radius:22%; filter:drop-shadow(0 8px 16px rgba(30,10,10,0.22)); margin-bottom:4px; }
-  .cta-row .l1{ font-weight:700; color:#50241F; font-size:clamp(17px,1.9vw,22px); }
-  .cta-row .l2{ font-weight:900; color:#941E05; font-size:clamp(21px,2.3vw,27px); }
+  .cta-row img{ width:clamp(64px,6.6vw,88px); height:clamp(64px,6.6vw,88px); border-radius:22%; filter:drop-shadow(0 8px 16px rgba(30,10,10,0.22)); margin-bottom:6px; }
+  .cta-row .l1{ font-weight:700; color:#50241F; font-size:clamp(20px,2.3vw,27px); }
+  .cta-row .l2{ font-weight:900; color:#941E05; font-size:clamp(26px,2.9vw,36px); }
   /* ---- group of 3 slide ---- */
   .trio{ display:flex; flex-direction:column; align-items:center; gap:clamp(20px,3.2vh,40px); }
   .trio-row{ display:flex; align-items:center; justify-content:center; gap:clamp(18px,3vw,42px); }
@@ -226,30 +228,6 @@
   }
   .trio .plus{ font-size:clamp(46px,7.4vh,88px); font-weight:900; color:var(--purple-deep); }
   .trio .x3{ font-size:clamp(28px,4vh,44px); font-weight:900; color:var(--orange-deep); letter-spacing:1.5px; }
-  /* ---- paired image + caption rows (start/join, play) ---- */
-  .mini-stack{ display:flex; flex-direction:row; flex-wrap:wrap; align-items:flex-start; justify-content:center; gap:clamp(24px,4vw,64px); }
-  .mini-item{ display:flex; flex-direction:column; align-items:center; gap:clamp(8px,1.1vh,14px); }
-  .mini-item .tag{
-    font-weight:800; font-size:clamp(22px,2.5vw,32px); padding:9px 24px; border-radius:14px;
-    color:var(--white); box-shadow:0 10px 20px rgba(0,0,0,0.14);
-  }
-  .mini-item.start .tag{ background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%); }
-  .mini-item.join .tag{ background:var(--blue-deep); }
-  .mini-item .num{
-    width:clamp(48px,4.6vw,66px); height:clamp(48px,4.6vw,66px); border-radius:50%;
-    background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
-    color:var(--white); font-weight:900; font-size:clamp(22px,2.3vw,29px);
-    display:flex; align-items:center; justify-content:center;
-    box-shadow:0 8px 16px rgba(124,58,237,0.28);
-  }
-  .mini-item .mini-cap{
-    font-weight:800; font-size:clamp(20px,2.2vw,28px); color:var(--purple-deep);
-    text-align:center; max-width:360px; line-height:1.22;
-  }
-  .wrap-line{
-    font-weight:800; font-size:clamp(25px,2.9vw,38px); color:var(--purple-deep);
-    text-align:center; margin-top:clamp(8px,1.2vh,16px); max-width:1000px;
-  }
   /* ---- fullscreen button ---- */
   #fsBtn{
     position:fixed; top:16px; right:16px; z-index:60;
@@ -277,8 +255,7 @@
   @media (max-width:800px), (max-height:560px){
     .thirds{ flex-direction:column; gap:18px; }
     .third-visual, .third-text, .third-text-mid{ flex:0 0 auto; padding-left:0; padding-right:0; }
-    .third-text{ align-items:center; text-align:center; }
-    .mini-stack{ flex-direction:column; }
+    .third-text{ align-items:center; text-align:center; justify-content:center; }
   }
 </style>
 </head>
@@ -304,7 +281,7 @@
   <!-- Slide 1: Group of 3 -->
   <section class="slide" id="slide-1">
     <div class="badge pop">Step 1</div>
-    <h1 class="title pop" style="animation-delay:.1s">Find Your Group of 3</h1>
+    <h1 class="title pop" style="animation-delay:.1s; margin-top:2.6vh;">Find Your Group of 3</h1>
     <div class="thirds">
       <div class="third-visual auto">
         <div class="trio">
@@ -408,23 +385,24 @@
 
   <!-- Slide 6: Play -->
   <section class="slide" id="slide-6">
-    <div class="badge pop">Step 6</div>
-    <h1 class="title pop" style="animation-delay:.1s">Play Your Game!</h1>
-    <div class="mini-stack">
-      <div class="mini-item reveal-l" style="animation-delay:.24s">
-        <div class="num">1</div>
-        <div class="phone trio"><img src="assets/IMG_3982.jpg" alt="Random game chosen"></div>
-        <div class="mini-cap">A game is randomly picked</div>
+    <div class="thirds">
+      <div class="third-visual reveal-l" style="animation-delay:.2s">
+        <div class="phone quarter"><img src="assets/IMG_3982.jpg" alt="Random game chosen"></div>
       </div>
-      <div class="mini-item reveal-l" style="animation-delay:.4s">
-        <div class="num">2</div>
-        <div class="phone trio"><img src="assets/IMG_3974.png" alt="Rules screen"></div>
-        <div class="mini-cap">Read the simple rules</div>
+      <div class="third-visual reveal-l" style="animation-delay:.32s">
+        <div class="phone quarter"><img src="assets/IMG_3974.png" alt="Rules screen"></div>
       </div>
-      <div class="mini-item reveal-r" style="animation-delay:.56s">
-        <div class="num">3</div>
-        <div class="phone trio"><img src="assets/IMG_3975.png" alt="Gameplay screen"></div>
-        <div class="mini-cap">Tap "Let's Play" &amp; play each round</div>
+      <div class="third-visual reveal-r" style="animation-delay:.44s">
+        <div class="phone quarter"><img src="assets/IMG_3975.png" alt="Gameplay screen"></div>
+      </div>
+      <div class="third-text quarter">
+        <div class="badge pop">Step 6</div>
+        <h1 class="title left pop" style="animation-delay:.1s">Play Your Game!</h1>
+        <div class="bullets compact">
+          <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">A game is <em>randomly picked</em></div></div>
+          <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Read the simple rules</div></div>
+          <div class="b reveal-up" style="animation-delay:.62s"><div class="num">3</div><div class="txt">Play each round together</div></div>
+        </div>
       </div>
     </div>
   </section>
@@ -442,7 +420,7 @@
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">See the final scores and the winner</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Tap <em>"Back to home"</em> when you're done</div></div>
-          <div class="b reveal-up" style="animation-delay:.62s"><div class="num">3</div><div class="txt">Ready for another round? Let's go! 🎉</div></div>
+          <div class="b reveal-up" style="animation-delay:.62s"><div class="num">3</div><div class="txt">Ready to play again? 🎉</div></div>
         </div>
         <div class="cta-row reveal-up" style="animation-delay:.8s">
           <img src="assets/Sambandh-app-icon.png" alt="Sambandh app icon">
