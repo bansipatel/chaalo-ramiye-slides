@@ -172,15 +172,15 @@
     gap:clamp(8px,1.6vh,18px); flex:1 1 auto; min-height:0;
   }
   .bookend-icon{
-    max-height:28vh; width:auto;
+    max-height:36vh; width:auto;
     filter:drop-shadow(0 20px 42px rgba(74,20,40,0.3));
   }
   .bookend-logo{
-    max-height:19vh; width:auto;
+    max-height:25vh; width:auto;
     filter:drop-shadow(0 8px 18px rgba(74,20,40,0.16));
   }
   p.subtitle{
-    font-size:clamp(24px,2.8vw,36px); font-weight:800; color:var(--purple-deep);
+    font-size:clamp(28px,3.4vw,46px); font-weight:800; color:var(--purple-deep);
     margin:0; text-align:center;
   }
   .pill{
@@ -241,6 +241,18 @@
     transition:background .15s ease, transform .15s ease;
   }
   #fsBtn:hover{ background:rgba(30,27,46,0.8); transform:scale(1.06); }
+  /* ---- subtle skip icon (cover slide only) ---- */
+  #skipBtn{
+    position:fixed; right:clamp(20px,3vw,40px); bottom:clamp(20px,3.5vh,44px); z-index:70;
+    width:clamp(46px,4.6vw,60px); height:clamp(46px,4.6vw,60px); border-radius:50%;
+    background:rgba(124,58,237,0.12); border:1px solid rgba(124,58,237,0.22);
+    color:var(--purple-deep); font-size:clamp(18px,1.9vw,24px);
+    display:flex; align-items:center; justify-content:center;
+    cursor:pointer; opacity:0.65;
+    transition:opacity .15s ease, transform .15s ease, background .15s ease;
+  }
+  #skipBtn:hover{ opacity:1; background:rgba(124,58,237,0.2); transform:scale(1.08); }
+  #skipBtn:active{ transform:scale(0.94); }
   .tap-zone{ position:absolute; inset:0; z-index:1; }
   .tap-zone.left{ width:32%; left:0; }
   .tap-zone.right{ width:68%; right:0; left:auto; }
@@ -254,6 +266,7 @@
 <body>
 
 <button id="fsBtn" onclick="toggleFullscreen()" title="Fullscreen (press F)">⛶</button>
+<button id="skipBtn" onclick="go(1)" title="Next" aria-label="Next slide">➜</button>
 
 <div id="deck">
 
@@ -264,7 +277,6 @@
       <img class="bookend-icon pop" style="--rot:-8deg; animation-delay:.05s" src="assets/intro2.png" alt="Chaalo! Madiye, Ramiye, Jaaniye group icon">
       <img class="bookend-logo pop" style="--rot:4deg; animation-delay:.28s" src="assets/intro1.png" alt="Chaalo! Madiye, Ramiye, Jaaniye logo">
       <p class="subtitle reveal-up" style="animation-delay:.55s">Let's learn to play!</p>
-      <div class="pill reveal-up" style="animation-delay:.7s">🎮 A quick 7-step guide</div>
     </div>
   </section>
 
@@ -442,8 +454,10 @@
     els.forEach(el => { el.style.animationName = ''; });
   }
 
+  const skipBtn = document.getElementById('skipBtn');
   function render(prevIdx){
     slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+    skipBtn.style.display = idx === 0 ? 'flex' : 'none';
     if (prevIdx !== idx) requestAnimationFrame(() => replay(slides[idx]));
   }
 
