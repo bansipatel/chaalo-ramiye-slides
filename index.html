@@ -36,7 +36,7 @@
     position:absolute;inset:0;
     display:flex;flex-direction:column;
     align-items:center;justify-content:center;
-    padding:4vh 5vw;
+    padding:2vh 2.5vw;
     opacity:0;pointer-events:none;
     transform:scale(0.96);
     transition:opacity .5s ease, transform .5s ease;
@@ -74,49 +74,49 @@
     background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
     color:var(--white);
     font-weight:800;
-    font-size:clamp(18px,2vw,26px);
+    font-size:clamp(20px,2.3vw,30px);
     letter-spacing:1.5px;
-    padding:9px 26px;
+    padding:10px 28px;
     border-radius:999px;
     box-shadow:0 8px 20px rgba(124,58,237,0.28);
-    margin-bottom:1.6vh;
+    margin-bottom:1vh;
     text-transform:uppercase;
     --rot:-8deg;
     flex:0 0 auto;
   }
   h1.title{
-    font-size:clamp(34px,4.6vw,66px);
+    font-size:clamp(38px,5.4vw,78px);
     font-weight:900;
     letter-spacing:-1px;
     color:var(--purple-deep);
     text-align:center;
-    margin:0 0 3vh 0;
-    line-height:1.15;
+    margin:0 0 2vh 0;
+    line-height:1.1;
     flex:0 0 auto;
   }
   /* ---- two-column step layout: visual on the left, bullets on the right ---- */
   .step-layout{
     display:flex; align-items:center; justify-content:center;
-    gap:clamp(24px,5vw,72px);
-    width:100%; max-width:1400px;
+    gap:clamp(24px,4.5vw,64px);
+    width:100%; max-width:1500px;
     flex:1 1 auto; min-height:0;
   }
   .step-visual{ flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
   .bullets{
-    display:flex; flex-direction:column; gap:clamp(16px,2.6vh,30px);
-    text-align:left; max-width:600px; flex:1 1 420px;
+    display:flex; flex-direction:column; gap:clamp(18px,3vh,34px);
+    text-align:left; max-width:640px; flex:1 1 440px;
   }
   .bullets .b{ display:flex; align-items:flex-start; gap:18px; }
   .bullets .b .num{
-    flex:0 0 auto; width:clamp(36px,3.4vw,48px); height:clamp(36px,3.4vw,48px);
+    flex:0 0 auto; width:clamp(40px,3.8vw,54px); height:clamp(40px,3.8vw,54px);
     border-radius:50%; background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
-    color:var(--white); font-weight:900; font-size:clamp(16px,1.6vw,20px);
+    color:var(--white); font-weight:900; font-size:clamp(18px,1.8vw,23px);
     display:flex; align-items:center; justify-content:center;
     box-shadow:0 6px 14px rgba(124,58,237,0.28); margin-top:1px;
   }
   .bullets .b .txt{
-    font-weight:700; font-size:clamp(20px,2.3vw,30px); color:var(--purple-deep);
-    line-height:1.35; padding-top:3px;
+    font-weight:700; font-size:clamp(23px,2.7vw,36px); color:var(--purple-deep);
+    line-height:1.3; padding-top:3px;
   }
   .bullets .b .txt em{ font-style:normal; color:var(--orange-deep); font-weight:900; }
   .bullets .b .txt em.blue{ color:var(--blue-deep); }
@@ -124,7 +124,7 @@
   /* ---- phone frame (height-driven so it always fits the viewport) ---- */
   .phone{
     position:relative;
-    height:clamp(300px,64vh,760px);
+    height:clamp(320px,74vh,900px);
     width:auto;
     aspect-ratio:1320/2868;
     border-radius:9%/4.2%;
@@ -136,8 +136,8 @@
   .phone img{
     width:100%;height:100%;object-fit:cover;display:block;
   }
-  .phone.duo{ height:clamp(280px,56vh,600px); }
-  .phone.trio{ height:clamp(230px,46vh,460px); }
+  .phone.duo{ height:clamp(280px,50vh,600px); }
+  .phone.trio{ height:clamp(260px,54vh,580px); }
   /* ---- highlight ping ---- */
   .ping{
     position:absolute;
@@ -169,18 +169,22 @@
   /* ---- cover & final slide (LogoIntroCard look) ---- */
   .bookend-stack{
     display:flex; flex-direction:column; align-items:center; justify-content:center;
-    gap:clamp(8px,1.6vh,18px); flex:1 1 auto; min-height:0;
+    gap:clamp(20px,3vh,44px); flex:1 1 auto; min-height:0; width:100%;
+  }
+  .bookend-row{
+    display:flex; flex-direction:row; align-items:center; justify-content:center;
+    gap:clamp(36px,5.5vw,100px); flex-wrap:wrap; width:100%;
   }
   .bookend-icon{
-    max-height:36vh; width:auto;
+    max-height:64vh; max-width:42vw; width:auto; height:auto;
     filter:drop-shadow(0 20px 42px rgba(74,20,40,0.3));
   }
   .bookend-logo{
-    max-height:25vh; width:auto;
+    max-height:46vh; max-width:46vw; width:auto; height:auto;
     filter:drop-shadow(0 8px 18px rgba(74,20,40,0.16));
   }
   p.subtitle{
-    font-size:clamp(28px,3.4vw,46px); font-weight:800; color:var(--purple-deep);
+    font-size:clamp(32px,4vw,54px); font-weight:800; color:var(--purple-deep);
     margin:0; text-align:center;
   }
   .pill{
@@ -189,48 +193,48 @@
     border:1px solid rgba(124,58,237,0.18);
   }
   .cta-row{
-    display:flex; flex-direction:column; align-items:center; gap:4px; margin-top:clamp(10px,1.6vh,18px);
+    display:flex; flex-direction:column; align-items:center; gap:5px; margin-top:clamp(10px,1.6vh,18px);
   }
-  .cta-row img{ width:clamp(44px,4.4vw,58px); height:clamp(44px,4.4vw,58px); border-radius:22%; filter:drop-shadow(0 8px 16px rgba(30,10,10,0.22)); margin-bottom:4px; }
-  .cta-row .l1{ font-weight:700; color:#50241F; font-size:clamp(15px,1.7vw,19px); }
-  .cta-row .l2{ font-weight:900; color:#941E05; font-size:clamp(18px,2vw,23px); }
+  .cta-row img{ width:clamp(50px,5vw,66px); height:clamp(50px,5vw,66px); border-radius:22%; filter:drop-shadow(0 8px 16px rgba(30,10,10,0.22)); margin-bottom:4px; }
+  .cta-row .l1{ font-weight:700; color:#50241F; font-size:clamp(17px,1.9vw,22px); }
+  .cta-row .l2{ font-weight:900; color:#941E05; font-size:clamp(21px,2.3vw,27px); }
   /* ---- group of 3 slide ---- */
-  .trio{ display:flex; flex-direction:column; align-items:center; gap:clamp(14px,2.4vh,28px); }
-  .trio-row{ display:flex; align-items:center; justify-content:center; gap:clamp(14px,2.2vw,30px); }
+  .trio{ display:flex; flex-direction:column; align-items:center; gap:clamp(18px,3vh,36px); }
+  .trio-row{ display:flex; align-items:center; justify-content:center; gap:clamp(16px,2.6vw,36px); }
   .trio .avatar{
-    width:clamp(90px,13vh,170px); height:clamp(90px,13vh,170px);
+    width:clamp(110px,17vh,220px); height:clamp(110px,17vh,220px);
     border-radius:50%;
     background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
     display:flex;align-items:center;justify-content:center;
-    font-size:clamp(42px,6.4vh,80px);
+    font-size:clamp(54px,8.2vh,104px);
     box-shadow:0 14px 26px rgba(124,58,237,0.3);
     border:6px solid var(--white);
   }
-  .trio .plus{ font-size:clamp(30px,4.4vh,52px); font-weight:900; color:var(--purple-deep); }
-  .trio .x3{ font-size:clamp(19px,2.4vh,26px); font-weight:900; color:var(--orange-deep); letter-spacing:1.5px; }
+  .trio .plus{ font-size:clamp(36px,5.6vh,64px); font-weight:900; color:var(--purple-deep); }
+  .trio .x3{ font-size:clamp(22px,3vh,32px); font-weight:900; color:var(--orange-deep); letter-spacing:1.5px; }
   /* ---- paired image + caption rows (start/join, play) ---- */
-  .mini-stack{ display:flex; flex-direction:row; flex-wrap:wrap; align-items:flex-start; justify-content:center; gap:clamp(28px,4.5vw,72px); }
-  .mini-item{ display:flex; flex-direction:column; align-items:center; gap:clamp(10px,1.6vh,18px); }
+  .mini-stack{ display:flex; flex-direction:row; flex-wrap:wrap; align-items:flex-start; justify-content:center; gap:clamp(24px,4vw,64px); }
+  .mini-item{ display:flex; flex-direction:column; align-items:center; gap:clamp(12px,1.8vh,20px); }
   .mini-item .tag{
-    font-weight:800; font-size:clamp(18px,2vw,26px); padding:8px 22px; border-radius:14px;
+    font-weight:800; font-size:clamp(20px,2.3vw,30px); padding:9px 24px; border-radius:14px;
     color:var(--white); box-shadow:0 10px 20px rgba(0,0,0,0.14);
   }
   .mini-item.start .tag{ background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%); }
   .mini-item.join .tag{ background:var(--blue-deep); }
   .mini-item .num{
-    width:clamp(40px,3.8vw,54px); height:clamp(40px,3.8vw,54px); border-radius:50%;
+    width:clamp(44px,4.2vw,60px); height:clamp(44px,4.2vw,60px); border-radius:50%;
     background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
-    color:var(--white); font-weight:900; font-size:clamp(18px,1.9vw,24px);
+    color:var(--white); font-weight:900; font-size:clamp(20px,2.1vw,27px);
     display:flex; align-items:center; justify-content:center;
     box-shadow:0 8px 16px rgba(124,58,237,0.28);
   }
   .mini-item .mini-cap{
-    font-weight:800; font-size:clamp(17px,1.9vw,25px); color:var(--purple-deep);
-    text-align:center; max-width:290px; line-height:1.3;
+    font-weight:800; font-size:clamp(20px,2.3vw,30px); color:var(--purple-deep);
+    text-align:center; max-width:340px; line-height:1.28;
   }
   .wrap-line{
-    font-weight:800; font-size:clamp(19px,2.2vw,28px); color:var(--purple-deep);
-    text-align:center; margin-top:clamp(14px,2.4vh,26px); max-width:900px;
+    font-weight:800; font-size:clamp(23px,2.7vw,36px); color:var(--purple-deep);
+    text-align:center; margin-top:clamp(14px,2.2vh,26px); max-width:1000px;
   }
   /* ---- fullscreen button ---- */
   #fsBtn{
@@ -274,8 +278,10 @@
   <section class="slide active" id="slide-0">
     <div class="confetti-host"></div>
     <div class="bookend-stack">
-      <img class="bookend-icon pop" style="--rot:-8deg; animation-delay:.05s" src="assets/intro2.png" alt="Chaalo! Madiye, Ramiye, Jaaniye group icon">
-      <img class="bookend-logo pop" style="--rot:4deg; animation-delay:.28s" src="assets/intro1.png" alt="Chaalo! Madiye, Ramiye, Jaaniye logo">
+      <div class="bookend-row">
+        <img class="bookend-icon pop" style="--rot:-8deg; animation-delay:.05s" src="assets/intro2.png" alt="Chaalo! Madiye, Ramiye, Jaaniye group icon">
+        <img class="bookend-logo pop" style="--rot:4deg; animation-delay:.28s" src="assets/intro1.png" alt="Chaalo! Madiye, Ramiye, Jaaniye logo">
+      </div>
       <p class="subtitle reveal-up" style="animation-delay:.55s">Let's learn to play!</p>
     </div>
   </section>
