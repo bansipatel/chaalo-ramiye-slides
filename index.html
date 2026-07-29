@@ -95,6 +95,7 @@
     flex:0 0 auto;
   }
   h1.title.left{ text-align:left; }
+  .badge.big{ font-size:clamp(32px,3.8vw,50px); padding:14px 36px; }
   /* ---- thirds layout: phone(s) get a dedicated column, text fills the rest ----
      flex-grow ratios (not percentage flex-basis) so `gap` never causes overflow. */
   .thirds{
@@ -105,11 +106,17 @@
     flex:1 1 0; display:flex; align-items:center; justify-content:center; min-width:0;
   }
   .third-visual.auto{ flex:0 0 auto; }
+  .third-visual.stacked{ flex-direction:column; gap:clamp(12px,1.8vh,22px); }
   .third-text{
     flex:2 1 0; display:flex; flex-direction:column; align-items:flex-start; justify-content:space-evenly;
     min-width:0;
   }
+  .third-text.centered{ align-items:center; text-align:center; }
   .third-text.quarter{ flex:1 1 0; }
+  .phone-cap{
+    font-weight:800; color:var(--purple-deep); text-align:center;
+    font-size:clamp(20px,2.2vw,30px); line-height:1.25; max-width:340px;
+  }
   .third-text-mid{
     flex:1 1 0; display:flex; flex-direction:column; align-items:center; justify-content:center;
     min-width:0; text-align:center;
@@ -314,9 +321,9 @@
           <div class="ping" style="left:86.3%; top:29.7%;"></div>
         </div>
       </div>
-      <div class="third-text">
-        <div class="badge pop">Step 2</div>
-        <h1 class="title left pop" style="animation-delay:.1s">Open the App</h1>
+      <div class="third-text centered">
+        <div class="badge big pop">Step 2</div>
+        <h1 class="title pop" style="animation-delay:.1s">Open the App</h1>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Open the <em>Sambandh</em> app on your phone</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Look for the colorful banner on your home screen</div></div>
@@ -334,9 +341,9 @@
       </div>
       <div class="third-text-mid">
         <div class="badge pop">Step 3</div>
-        <h1 class="title pop" style="animation-delay:.1s">Start or Join a Game</h1>
+        <h1 class="title pop" style="animation-delay:.1s">Host or Join a Game</h1>
         <div class="bullets compact">
-          <div class="b reveal-up" style="animation-delay:.34s"><div class="num">📤</div><div class="txt"><em>Starting?</em> Share your code</div></div>
+          <div class="b reveal-up" style="animation-delay:.34s"><div class="num">📤</div><div class="txt"><em>Hosting?</em> Share your code</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">🔑</div><div class="txt"><em class="blue">Joining?</em> Enter their code</div></div>
           <div class="b reveal-up" style="animation-delay:.62s"><div class="num">🎮</div><div class="txt">Same game, either way!</div></div>
         </div>
@@ -353,9 +360,9 @@
       <div class="third-visual reveal-l" style="animation-delay:.24s">
         <div class="phone"><img src="assets/IMG_3981.jpg" alt="Ready screen"></div>
       </div>
-      <div class="third-text">
-        <div class="badge pop">Step 4</div>
-        <h1 class="title left pop" style="animation-delay:.1s">Everyone Taps <em style="color:var(--orange-deep); font-style:normal;">"I'm Ready"</em></h1>
+      <div class="third-text centered">
+        <div class="badge big pop">Step 4</div>
+        <h1 class="title pop" style="animation-delay:.1s">Everyone Taps <em style="color:var(--orange-deep); font-style:normal;">"I'm Ready"</em></h1>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Tap <em>"I'm Ready"</em> when you're set</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Wait for all <em>3 players</em> to be ready</div></div>
@@ -371,9 +378,9 @@
       <div class="third-visual reveal-l" style="animation-delay:.24s">
         <div class="phone"><img src="assets/IMG_3972.png" alt="Icebreaker question screen"></div>
       </div>
-      <div class="third-text">
-        <div class="badge pop">Step 5</div>
-        <h1 class="title left pop" style="animation-delay:.1s">Break the Ice</h1>
+      <div class="third-text centered">
+        <div class="badge big pop">Step 5</div>
+        <h1 class="title pop" style="animation-delay:.1s">Break the Ice</h1>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Everyone gets the <em>same fun question</em></div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Take turns sharing your answer out loud</div></div>
@@ -386,23 +393,21 @@
   <!-- Slide 6: Play -->
   <section class="slide" id="slide-6">
     <div class="thirds">
-      <div class="third-visual reveal-l" style="animation-delay:.2s">
+      <div class="third-visual stacked reveal-l" style="animation-delay:.2s">
         <div class="phone quarter"><img src="assets/IMG_3982.jpg" alt="Random game chosen"></div>
+        <div class="phone-cap">A game is randomly picked</div>
       </div>
-      <div class="third-visual reveal-l" style="animation-delay:.32s">
+      <div class="third-visual stacked reveal-l" style="animation-delay:.32s">
         <div class="phone quarter"><img src="assets/IMG_3974.png" alt="Rules screen"></div>
+        <div class="phone-cap">Read the simple rules</div>
       </div>
-      <div class="third-visual reveal-r" style="animation-delay:.44s">
+      <div class="third-visual stacked reveal-r" style="animation-delay:.44s">
         <div class="phone quarter"><img src="assets/IMG_3975.png" alt="Gameplay screen"></div>
+        <div class="phone-cap">Play each round together</div>
       </div>
-      <div class="third-text quarter">
+      <div class="third-text quarter centered">
         <div class="badge pop">Step 6</div>
-        <h1 class="title left pop" style="animation-delay:.1s">Play Your Game!</h1>
-        <div class="bullets compact">
-          <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">A game is <em>randomly picked</em></div></div>
-          <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Read the simple rules</div></div>
-          <div class="b reveal-up" style="animation-delay:.62s"><div class="num">3</div><div class="txt">Play each round together</div></div>
-        </div>
+        <h1 class="title pop" style="animation-delay:.1s">Play Your Game!</h1>
       </div>
     </div>
   </section>
