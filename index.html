@@ -1,0 +1,495 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Chaalo! Madiye, Ramiye, Jaaniye — How to Play</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --purple:#7C3AED;
+    --purple-deep:#5B21B6;
+    --orange:#FB923C;
+    --orange-deep:#F97316;
+    --blue-deep:#2563EB;
+    --blush:#FCE7F3;
+    --blush-deep:#FBCFE8;
+    --ink:#1E1B2E;
+    --white:#FFFFFF;
+    --gold:#FACC15;
+    --spring:cubic-bezier(.34,1.56,.64,1);
+  }
+  *{box-sizing:border-box;}
+  html,body{
+    margin:0;padding:0;height:100%;overflow:hidden;
+    font-family:'Nunito','Segoe UI Rounded','Segoe UI',Verdana,sans-serif;
+    background:var(--ink);
+    -webkit-user-select:none;user-select:none;
+  }
+  #deck{
+    position:relative;
+    width:100vw;height:100vh;
+  }
+  .slide{
+    position:absolute;inset:0;
+    display:flex;flex-direction:column;
+    align-items:center;justify-content:center;
+    padding:4vh 5vw;
+    opacity:0;pointer-events:none;
+    transform:scale(0.96);
+    transition:opacity .5s ease, transform .5s ease;
+    background:linear-gradient(160deg, var(--blush) 0%, #FDE8EF 45%, var(--blush-deep) 100%);
+    overflow:hidden;
+  }
+  .slide.active{
+    opacity:1;pointer-events:auto;transform:scale(1);
+  }
+
+  /* ---- entrance animations (replayed via JS on every activation) ---- */
+  @keyframes popIn{
+    0%{ opacity:0; transform:scale(0.35) rotate(var(--rot,-6deg)); }
+    100%{ opacity:1; transform:scale(1) rotate(0deg); }
+  }
+  @keyframes slideL{
+    0%{ opacity:0; transform:translateX(-70px) rotate(-4deg); }
+    100%{ opacity:1; transform:translateX(0) rotate(0deg); }
+  }
+  @keyframes slideR{
+    0%{ opacity:0; transform:translateX(70px) rotate(4deg); }
+    100%{ opacity:1; transform:translateX(0) rotate(0deg); }
+  }
+  @keyframes fadeUp{
+    0%{ opacity:0; transform:translateY(18px); }
+    100%{ opacity:1; transform:translateY(0); }
+  }
+  .pop{ opacity:0; animation:popIn .7s var(--spring) forwards; }
+  .reveal-l{ opacity:0; animation:slideL .65s var(--spring) forwards; }
+  .reveal-r{ opacity:0; animation:slideR .65s var(--spring) forwards; }
+  .reveal-up{ opacity:0; animation:fadeUp .55s ease forwards; }
+
+  .badge{
+    display:inline-flex;align-items:center;gap:10px;
+    background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
+    color:var(--white);
+    font-weight:800;
+    font-size:clamp(18px,2vw,26px);
+    letter-spacing:1.5px;
+    padding:9px 26px;
+    border-radius:999px;
+    box-shadow:0 8px 20px rgba(124,58,237,0.28);
+    margin-bottom:1.6vh;
+    text-transform:uppercase;
+    --rot:-8deg;
+    flex:0 0 auto;
+  }
+  h1.title{
+    font-size:clamp(34px,4.6vw,66px);
+    font-weight:900;
+    letter-spacing:-1px;
+    color:var(--purple-deep);
+    text-align:center;
+    margin:0 0 3vh 0;
+    line-height:1.15;
+    flex:0 0 auto;
+  }
+  /* ---- two-column step layout: visual on the left, bullets on the right ---- */
+  .step-layout{
+    display:flex; align-items:center; justify-content:center;
+    gap:clamp(24px,5vw,72px);
+    width:100%; max-width:1400px;
+    flex:1 1 auto; min-height:0;
+  }
+  .step-visual{ flex:0 0 auto; display:flex; align-items:center; justify-content:center; }
+  .bullets{
+    display:flex; flex-direction:column; gap:clamp(16px,2.6vh,30px);
+    text-align:left; max-width:600px; flex:1 1 420px;
+  }
+  .bullets .b{ display:flex; align-items:flex-start; gap:18px; }
+  .bullets .b .num{
+    flex:0 0 auto; width:clamp(36px,3.4vw,48px); height:clamp(36px,3.4vw,48px);
+    border-radius:50%; background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
+    color:var(--white); font-weight:900; font-size:clamp(16px,1.6vw,20px);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 14px rgba(124,58,237,0.28); margin-top:1px;
+  }
+  .bullets .b .txt{
+    font-weight:700; font-size:clamp(20px,2.3vw,30px); color:var(--purple-deep);
+    line-height:1.35; padding-top:3px;
+  }
+  .bullets .b .txt em{ font-style:normal; color:var(--orange-deep); font-weight:900; }
+  .bullets .b .txt em.blue{ color:var(--blue-deep); }
+
+  /* ---- phone frame (height-driven so it always fits the viewport) ---- */
+  .phone{
+    position:relative;
+    height:clamp(300px,64vh,760px);
+    width:auto;
+    aspect-ratio:1320/2868;
+    border-radius:9%/4.2%;
+    overflow:hidden;
+    background:#000;
+    box-shadow:0 26px 50px rgba(30,27,46,0.32), 0 0 0 6px var(--ink);
+    flex-shrink:0;
+  }
+  .phone img{
+    width:100%;height:100%;object-fit:cover;display:block;
+  }
+  .phone.duo{ height:clamp(280px,56vh,600px); }
+  .phone.trio{ height:clamp(230px,46vh,460px); }
+  /* ---- highlight ping ---- */
+  .ping{
+    position:absolute;
+    width:15%;aspect-ratio:1/1;
+    border-radius:50%;
+    border:4px solid var(--gold);
+    box-shadow:0 0 0 6px rgba(250,204,21,0.35), 0 0 22px 6px rgba(250,204,21,0.55);
+    transform:translate(-50%,-50%);
+    animation:pulse 1.4s ease-in-out infinite;
+    pointer-events:none;
+  }
+  @keyframes pulse{
+    0%{ transform:translate(-50%,-50%) scale(0.85); opacity:1; }
+    50%{ transform:translate(-50%,-50%) scale(1.25); opacity:0.55; }
+    100%{ transform:translate(-50%,-50%) scale(0.85); opacity:1; }
+  }
+  /* ---- confetti (matches the video's Intro / Outro scenes) ---- */
+  .confetti-host{ position:absolute; inset:0; pointer-events:none; overflow:hidden; z-index:0; }
+  .confetti-piece{
+    position:absolute; top:-5%; border-radius:2px;
+    animation:confettiFall linear infinite;
+    opacity:0.9;
+  }
+  @keyframes confettiFall{
+    0%{ transform:translateY(0) rotate(0deg); opacity:0; }
+    8%{ opacity:0.9; }
+    100%{ transform:translateY(115vh) rotate(360deg); opacity:0.15; }
+  }
+  /* ---- cover & final slide (LogoIntroCard look) ---- */
+  .bookend-stack{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    gap:clamp(8px,1.6vh,18px); flex:1 1 auto; min-height:0;
+  }
+  .bookend-icon{
+    max-height:28vh; width:auto;
+    filter:drop-shadow(0 20px 42px rgba(74,20,40,0.3));
+  }
+  .bookend-logo{
+    max-height:19vh; width:auto;
+    filter:drop-shadow(0 8px 18px rgba(74,20,40,0.16));
+  }
+  p.subtitle{
+    font-size:clamp(24px,2.8vw,36px); font-weight:800; color:var(--purple-deep);
+    margin:0; text-align:center;
+  }
+  .pill{
+    background:rgba(124,58,237,0.1); color:var(--purple-deep);
+    font-weight:800; padding:11px 28px; border-radius:999px; font-size:clamp(17px,1.9vw,23px);
+    border:1px solid rgba(124,58,237,0.18);
+  }
+  .cta-row{
+    display:flex; flex-direction:column; align-items:center; gap:4px; margin-top:clamp(10px,1.6vh,18px);
+  }
+  .cta-row img{ width:clamp(44px,4.4vw,58px); height:clamp(44px,4.4vw,58px); border-radius:22%; filter:drop-shadow(0 8px 16px rgba(30,10,10,0.22)); margin-bottom:4px; }
+  .cta-row .l1{ font-weight:700; color:#50241F; font-size:clamp(15px,1.7vw,19px); }
+  .cta-row .l2{ font-weight:900; color:#941E05; font-size:clamp(18px,2vw,23px); }
+  /* ---- group of 3 slide ---- */
+  .trio{ display:flex; flex-direction:column; align-items:center; gap:clamp(14px,2.4vh,28px); }
+  .trio-row{ display:flex; align-items:center; justify-content:center; gap:clamp(14px,2.2vw,30px); }
+  .trio .avatar{
+    width:clamp(90px,13vh,170px); height:clamp(90px,13vh,170px);
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
+    display:flex;align-items:center;justify-content:center;
+    font-size:clamp(42px,6.4vh,80px);
+    box-shadow:0 14px 26px rgba(124,58,237,0.3);
+    border:6px solid var(--white);
+  }
+  .trio .plus{ font-size:clamp(30px,4.4vh,52px); font-weight:900; color:var(--purple-deep); }
+  .trio .x3{ font-size:clamp(19px,2.4vh,26px); font-weight:900; color:var(--orange-deep); letter-spacing:1.5px; }
+  /* ---- paired image + caption rows (start/join, play) ---- */
+  .mini-stack{ display:flex; flex-direction:row; flex-wrap:wrap; align-items:flex-start; justify-content:center; gap:clamp(28px,4.5vw,72px); }
+  .mini-item{ display:flex; flex-direction:column; align-items:center; gap:clamp(10px,1.6vh,18px); }
+  .mini-item .tag{
+    font-weight:800; font-size:clamp(18px,2vw,26px); padding:8px 22px; border-radius:14px;
+    color:var(--white); box-shadow:0 10px 20px rgba(0,0,0,0.14);
+  }
+  .mini-item.start .tag{ background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%); }
+  .mini-item.join .tag{ background:var(--blue-deep); }
+  .mini-item .num{
+    width:clamp(40px,3.8vw,54px); height:clamp(40px,3.8vw,54px); border-radius:50%;
+    background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
+    color:var(--white); font-weight:900; font-size:clamp(18px,1.9vw,24px);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 8px 16px rgba(124,58,237,0.28);
+  }
+  .mini-item .mini-cap{
+    font-weight:800; font-size:clamp(17px,1.9vw,25px); color:var(--purple-deep);
+    text-align:center; max-width:290px; line-height:1.3;
+  }
+  .wrap-line{
+    font-weight:800; font-size:clamp(19px,2.2vw,28px); color:var(--purple-deep);
+    text-align:center; margin-top:clamp(14px,2.4vh,26px); max-width:900px;
+  }
+  /* ---- fullscreen button ---- */
+  #fsBtn{
+    position:fixed; top:16px; right:16px; z-index:60;
+    width:44px;height:44px;border-radius:50%;
+    background:rgba(30,27,46,0.55); color:var(--white); border:none;
+    font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center;
+    transition:background .15s ease, transform .15s ease;
+  }
+  #fsBtn:hover{ background:rgba(30,27,46,0.8); transform:scale(1.06); }
+  .tap-zone{ position:absolute; inset:0; z-index:1; }
+  .tap-zone.left{ width:32%; left:0; }
+  .tap-zone.right{ width:68%; right:0; left:auto; }
+  @media (max-width:800px), (max-height:560px){
+    .step-layout{ flex-direction:column; gap:18px; }
+    .bullets{ max-width:560px; }
+    .mini-stack{ flex-direction:column; }
+  }
+</style>
+</head>
+<body>
+
+<button id="fsBtn" onclick="toggleFullscreen()" title="Fullscreen (press F)">⛶</button>
+
+<div id="deck">
+
+  <!-- Slide 0: Cover -->
+  <section class="slide active" id="slide-0">
+    <div class="confetti-host"></div>
+    <div class="bookend-stack">
+      <img class="bookend-icon pop" style="--rot:-8deg; animation-delay:.05s" src="assets/intro2.png" alt="Chaalo! Madiye, Ramiye, Jaaniye group icon">
+      <img class="bookend-logo pop" style="--rot:4deg; animation-delay:.28s" src="assets/intro1.png" alt="Chaalo! Madiye, Ramiye, Jaaniye logo">
+      <p class="subtitle reveal-up" style="animation-delay:.55s">Let's learn to play!</p>
+      <div class="pill reveal-up" style="animation-delay:.7s">🎮 A quick 7-step guide</div>
+    </div>
+  </section>
+
+  <!-- Slide 1: Group of 3 -->
+  <section class="slide" id="slide-1">
+    <div class="badge pop">Step 1</div>
+    <h1 class="title pop" style="animation-delay:.1s">Find Your Group of 3</h1>
+    <div class="step-layout">
+      <div class="step-visual">
+        <div class="trio">
+          <div class="x3 pop" style="animation-delay:.2s">⭐ EXACTLY 3 PLAYERS</div>
+          <div class="trio-row">
+            <div class="avatar pop" style="--rot:-10deg; animation-delay:.3s">🧑</div>
+            <div class="plus pop" style="animation-delay:.42s">+</div>
+            <div class="avatar pop" style="--rot:8deg; animation-delay:.42s">🧑‍🦱</div>
+            <div class="plus pop" style="animation-delay:.54s">+</div>
+            <div class="avatar pop" style="--rot:-6deg; animation-delay:.54s">🧑‍🦳</div>
+          </div>
+        </div>
+      </div>
+      <div class="bullets">
+        <div class="b reveal-up" style="animation-delay:.3s"><div class="num">1</div><div class="txt">Every game is played in a team of <em>exactly 3</em></div></div>
+        <div class="b reveal-up" style="animation-delay:.44s"><div class="num">2</div><div class="txt">Grab 2 friends, family members, or coworkers</div></div>
+        <div class="b reveal-up" style="animation-delay:.58s"><div class="num">3</div><div class="txt">Got your 3? Let's open the app next</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 2: Open the App -->
+  <section class="slide" id="slide-2">
+    <div class="badge pop">Step 2</div>
+    <h1 class="title pop" style="animation-delay:.1s">Open the App</h1>
+    <div class="step-layout">
+      <div class="step-visual reveal-l" style="animation-delay:.24s">
+        <div class="phone">
+          <img src="assets/IMG_9999.png" alt="App home screen">
+          <div class="ping" style="left:86.3%; top:29.7%;"></div>
+        </div>
+      </div>
+      <div class="bullets">
+        <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Open the <em>Sambandh</em> app on your phone</div></div>
+        <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Look for the colorful banner on your home screen</div></div>
+        <div class="b reveal-up" style="animation-delay:.62s"><div class="num">3</div><div class="txt">Tap <em>"Chaalo! Madiye, Ramiye, Jaaniye"</em></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 3: Start or Join -->
+  <section class="slide" id="slide-3">
+    <div class="badge pop">Step 3</div>
+    <h1 class="title pop" style="animation-delay:.1s">Start or Join a Game</h1>
+    <div class="mini-stack">
+      <div class="mini-item start reveal-l" style="animation-delay:.24s">
+        <div class="tag">📤 Starting?</div>
+        <div class="phone duo"><img src="assets/IMG_3971.png" alt="Share code screen"></div>
+        <div class="mini-cap">Share your 6-letter code</div>
+      </div>
+      <div class="mini-item join reveal-r" style="animation-delay:.24s">
+        <div class="tag">🔑 Joining?</div>
+        <div class="phone duo"><img src="assets/IMG_3980.png" alt="Enter code screen"></div>
+        <div class="mini-cap">Enter a friend's code instead</div>
+      </div>
+    </div>
+    <div class="wrap-line reveal-up" style="animation-delay:.55s">Either way, you all land in the same game 🎮</div>
+  </section>
+
+  <!-- Slide 4: Get Ready -->
+  <section class="slide" id="slide-4">
+    <div class="badge pop">Step 4</div>
+    <h1 class="title pop" style="animation-delay:.1s">Everyone Taps <em style="color:var(--orange-deep); font-style:normal;">"I'm Ready"</em></h1>
+    <div class="step-layout">
+      <div class="step-visual reveal-l" style="animation-delay:.24s">
+        <div class="phone"><img src="assets/IMG_3981.jpg" alt="Ready screen"></div>
+      </div>
+      <div class="bullets">
+        <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Tap <em>"I'm Ready"</em> when you're set</div></div>
+        <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Wait for all <em>3 players</em> to be ready</div></div>
+        <div class="b reveal-up" style="animation-delay:.62s"><div class="num">3</div><div class="txt">The game begins automatically!</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 5: Icebreaker -->
+  <section class="slide" id="slide-5">
+    <div class="badge pop">Step 5</div>
+    <h1 class="title pop" style="animation-delay:.1s">Break the Ice</h1>
+    <div class="step-layout">
+      <div class="step-visual reveal-l" style="animation-delay:.24s">
+        <div class="phone"><img src="assets/IMG_3972.png" alt="Icebreaker question screen"></div>
+      </div>
+      <div class="bullets">
+        <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Everyone gets the <em>same fun question</em></div></div>
+        <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Take turns sharing your answer out loud</div></div>
+        <div class="b reveal-up" style="animation-delay:.62s"><div class="num">3</div><div class="txt">Tap <em>"I have shared"</em> to continue</div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 6: Play -->
+  <section class="slide" id="slide-6">
+    <div class="badge pop">Step 6</div>
+    <h1 class="title pop" style="animation-delay:.1s">Play Your Game!</h1>
+    <div class="mini-stack">
+      <div class="mini-item reveal-l" style="animation-delay:.24s">
+        <div class="num">1</div>
+        <div class="phone trio"><img src="assets/IMG_3982.jpg" alt="Random game chosen"></div>
+        <div class="mini-cap">A game is randomly picked</div>
+      </div>
+      <div class="mini-item reveal-l" style="animation-delay:.4s">
+        <div class="num">2</div>
+        <div class="phone trio"><img src="assets/IMG_3974.png" alt="Rules screen"></div>
+        <div class="mini-cap">Read the simple rules</div>
+      </div>
+      <div class="mini-item reveal-r" style="animation-delay:.56s">
+        <div class="num">3</div>
+        <div class="phone trio"><img src="assets/IMG_3975.png" alt="Gameplay screen"></div>
+        <div class="mini-cap">Tap "Let's Play" &amp; play each round</div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Slide 7: Winner / Play Again -->
+  <section class="slide" id="slide-last">
+    <div class="confetti-host"></div>
+    <div class="badge pop">Step 7</div>
+    <h1 class="title pop" style="animation-delay:.1s">See Who Won</h1>
+    <div class="step-layout">
+      <div class="step-visual reveal-r" style="animation-delay:.24s">
+        <div class="phone"><img src="assets/IMG_3976.png" alt="Results screen"></div>
+      </div>
+      <div class="bullets">
+        <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">See the final scores and the winner</div></div>
+        <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Tap <em>"Back to home"</em> when you're done</div></div>
+        <div class="b reveal-up" style="animation-delay:.62s"><div class="num">3</div><div class="txt">Ready for another round? Let's go! 🎉</div></div>
+      </div>
+    </div>
+    <div class="cta-row reveal-up" style="animation-delay:.8s">
+      <img src="assets/Sambandh-app-icon.png" alt="Sambandh app icon">
+      <div class="l1">Play exclusively now on the</div>
+      <div class="l2">Sambandh app</div>
+    </div>
+  </section>
+
+  <div class="tap-zone left" onclick="go(-1)"></div>
+  <div class="tap-zone right" onclick="go(1)"></div>
+</div>
+
+<script>
+  const slides = Array.from(document.querySelectorAll('.slide'));
+  const total = slides.length;
+  let idx = 0;
+
+  // confetti pieces, matching the video's brand palette
+  const confettiColors = ['#7C3AED', '#FB923C', '#FACC15', '#FFFFFF', '#F97316'];
+  document.querySelectorAll('.confetti-host').forEach((host) => {
+    for (let i = 0; i < 26; i++) {
+      const p = document.createElement('div');
+      p.className = 'confetti-piece';
+      const size = 5 + Math.random() * 7;
+      p.style.width = size + 'px';
+      p.style.height = size * (0.5 + Math.random() * 0.7) + 'px';
+      p.style.left = Math.random() * 100 + '%';
+      p.style.background = confettiColors[Math.floor(Math.random() * confettiColors.length)];
+      p.style.animationDuration = (5 + Math.random() * 5) + 's';
+      p.style.animationDelay = (Math.random() * 6) + 's';
+      host.appendChild(p);
+    }
+  });
+
+  // restart entrance animations every time a slide becomes active
+  function replay(slide){
+    const els = slide.querySelectorAll('.pop, .reveal-l, .reveal-r, .reveal-up');
+    els.forEach(el => { el.style.animationName = 'none'; });
+    void slide.offsetWidth; // force reflow
+    els.forEach(el => { el.style.animationName = ''; });
+  }
+
+  function render(prevIdx){
+    slides.forEach((s, i) => s.classList.toggle('active', i === idx));
+    if (prevIdx !== idx) requestAnimationFrame(() => replay(slides[idx]));
+  }
+
+  function go(dir){
+    const next = idx + dir;
+    if (next < 0 || next >= total) return;
+    const prev = idx;
+    idx = next;
+    render(prev);
+  }
+  function jump(i){
+    const prev = idx;
+    idx = i;
+    render(prev);
+  }
+
+  function toggleFullscreen(){
+    if (!document.fullscreenElement) {
+      document.documentElement.requestFullscreen().catch(() => {});
+    } else {
+      document.exitFullscreen();
+    }
+  }
+
+  document.addEventListener('keydown', (e) => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    if (e.key === 'ArrowRight' || e.key === ' ') go(1);
+    if (e.key === 'ArrowLeft') go(-1);
+    if (e.key === 'Home') jump(0);
+    if (e.key === 'End') jump(total - 1);
+    if (e.key === 'f' || e.key === 'F') toggleFullscreen();
+    if (e.key === 'Escape' && document.fullscreenElement) document.exitFullscreen();
+  });
+
+  // basic swipe support
+  let touchX = null;
+  document.addEventListener('touchstart', (e) => { touchX = e.touches[0].clientX; });
+  document.addEventListener('touchend', (e) => {
+    if (touchX === null) return;
+    const dx = e.changedTouches[0].clientX - touchX;
+    if (Math.abs(dx) > 50) go(dx < 0 ? 1 : -1);
+    touchX = null;
+  });
+
+  render(-1);
+</script>
+
+</body>
+</html>
