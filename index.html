@@ -95,6 +95,20 @@
     flex:0 0 auto;
   }
   h1.title.left{ text-align:left; }
+  /* looping shine sweep across the headline text */
+  @supports ((background-clip:text) or (-webkit-background-clip:text)){
+    h1.title{
+      background:linear-gradient(100deg, var(--purple-deep) 30%, #FFFFFF 48%, var(--purple-deep) 66%);
+      background-size:280% 100%;
+      -webkit-background-clip:text; background-clip:text;
+      -webkit-text-fill-color:transparent; color:transparent;
+      animation:titleShine 4.5s linear infinite;
+    }
+  }
+  @keyframes titleShine{
+    0%{ background-position:220% 0; }
+    100%{ background-position:-220% 0; }
+  }
   .badge.big{ font-size:clamp(32px,3.8vw,50px); padding:14px 36px; }
   /* ---- thirds layout: phone(s) get a dedicated column, text fills the rest ----
      flex-grow ratios (not percentage flex-basis) so `gap` never causes overflow. */
@@ -113,10 +127,6 @@
   }
   .third-text.centered{ align-items:center; text-align:center; }
   .third-text.quarter{ flex:1 1 0; }
-  .title-divider{
-    width:clamp(56px,6.5vw,100px); height:5px; border-radius:3px; flex:0 0 auto;
-    background:linear-gradient(90deg, var(--purple) 0%, var(--orange) 100%);
-  }
   .phone-cap-row{
     display:flex; align-items:center; justify-content:center; gap:clamp(10px,1.3vw,16px);
   }
@@ -230,7 +240,7 @@
   }
   .cta-row{
     display:flex; flex-direction:column; align-items:center; gap:7px;
-    margin-top:clamp(6px,1vh,14px); align-self:center; text-align:center;
+    margin-top:clamp(10px,1.6vh,20px); align-self:center; text-align:center;
   }
   .cta-row img{ width:clamp(64px,6.6vw,88px); height:clamp(64px,6.6vw,88px); border-radius:22%; filter:drop-shadow(0 8px 16px rgba(30,10,10,0.22)); margin-bottom:6px; }
   .cta-row .l1{ font-weight:700; color:#50241F; font-size:clamp(20px,2.3vw,27px); }
@@ -338,7 +348,6 @@
       <div class="third-text centered">
         <div class="badge big pop">Step 2</div>
         <h1 class="title pop" style="animation-delay:.1s">Open the App</h1>
-        <div class="title-divider reveal-up" style="animation-delay:.28s"></div>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Open the <em>Sambandh</em> app on your phone</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Look for the colorful banner on your home screen</div></div>
@@ -357,7 +366,6 @@
       <div class="third-text-mid">
         <div class="badge pop">Step 3</div>
         <h1 class="title pop" style="animation-delay:.1s">Host or Join a Game</h1>
-        <div class="title-divider reveal-up" style="animation-delay:.28s"></div>
         <div class="bullets compact">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">📤</div><div class="txt"><em>Hosting?</em> Share your code</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">🔑</div><div class="txt"><em class="blue">Joining?</em> Enter their code</div></div>
@@ -379,7 +387,6 @@
       <div class="third-text centered">
         <div class="badge big pop">Step 4</div>
         <h1 class="title pop" style="animation-delay:.1s">Everyone Taps <em style="color:var(--orange-deep); font-style:normal;">"I'm Ready"</em></h1>
-        <div class="title-divider reveal-up" style="animation-delay:.28s"></div>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Tap <em>"I'm Ready"</em> when you're set</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Wait for all <em>3 players</em> to be ready</div></div>
@@ -398,7 +405,6 @@
       <div class="third-text centered">
         <div class="badge big pop">Step 5</div>
         <h1 class="title pop" style="animation-delay:.1s">Break the Ice</h1>
-        <div class="title-divider reveal-up" style="animation-delay:.28s"></div>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Everyone gets the <em>same fun question</em></div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Take turns sharing your answer out loud</div></div>
@@ -440,7 +446,6 @@
       <div class="third-text centered">
         <div class="badge big pop">Step 7</div>
         <h1 class="title pop" style="animation-delay:.1s">See Who Won</h1>
-        <div class="title-divider reveal-up" style="animation-delay:.28s"></div>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">See the final scores and the winner</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Tap <em>"Back to home"</em> when you're done</div></div>
