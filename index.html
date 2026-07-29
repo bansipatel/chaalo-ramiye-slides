@@ -113,9 +113,19 @@
   }
   .third-text.centered{ align-items:center; text-align:center; }
   .third-text.quarter{ flex:1 1 0; }
+  .phone-cap-row{
+    display:flex; align-items:center; justify-content:center; gap:clamp(10px,1.3vw,16px);
+  }
+  .phone-cap-row .num{
+    flex:0 0 auto; width:clamp(34px,3.2vw,44px); height:clamp(34px,3.2vw,44px);
+    border-radius:50%; background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
+    color:var(--white); font-weight:900; font-size:clamp(16px,1.5vw,20px);
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 6px 14px rgba(124,58,237,0.28);
+  }
   .phone-cap{
-    font-weight:800; color:var(--purple-deep); text-align:center;
-    font-size:clamp(20px,2.2vw,30px); line-height:1.25; max-width:340px;
+    font-weight:800; color:var(--purple-deep); text-align:left;
+    font-size:clamp(20px,2.2vw,30px); line-height:1.22; max-width:230px;
   }
   .third-text-mid{
     flex:1 1 0; display:flex; flex-direction:column; align-items:center; justify-content:center;
@@ -395,15 +405,15 @@
     <div class="thirds">
       <div class="third-visual stacked reveal-l" style="animation-delay:.2s">
         <div class="phone quarter"><img src="assets/IMG_3982.jpg" alt="Random game chosen"></div>
-        <div class="phone-cap">A game is randomly picked</div>
+        <div class="phone-cap-row"><div class="num">1</div><div class="phone-cap">A game is randomly picked</div></div>
       </div>
       <div class="third-visual stacked reveal-l" style="animation-delay:.32s">
         <div class="phone quarter"><img src="assets/IMG_3974.png" alt="Rules screen"></div>
-        <div class="phone-cap">Read the simple rules</div>
+        <div class="phone-cap-row"><div class="num">2</div><div class="phone-cap">Read the simple rules</div></div>
       </div>
       <div class="third-visual stacked reveal-r" style="animation-delay:.44s">
         <div class="phone quarter"><img src="assets/IMG_3975.png" alt="Gameplay screen"></div>
-        <div class="phone-cap">Play each round together</div>
+        <div class="phone-cap-row"><div class="num">3</div><div class="phone-cap">Play each round together</div></div>
       </div>
       <div class="third-text quarter centered">
         <div class="badge pop">Step 6</div>
