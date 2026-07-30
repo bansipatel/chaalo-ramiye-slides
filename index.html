@@ -255,9 +255,30 @@
     width:100%; max-width:1700px; flex:1 1 auto; min-height:0;
     gap:clamp(20px,3.6vh,44px); text-align:center;
   }
+  .win-hero{
+    display:flex; align-items:center; justify-content:center;
+    gap:clamp(24px,4.4vw,64px); width:100%; flex-wrap:wrap;
+  }
+  .ribbon-wrap{ flex:0 0 auto; }
+  .ribbon{
+    position:relative; display:inline-block;
+    background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
+    color:var(--white); font-weight:900; letter-spacing:0.5px;
+    font-size:clamp(22px,2.8vw,38px);
+    padding:clamp(16px,2.4vh,26px) clamp(38px,4.6vw,64px);
+    clip-path:polygon(6% 0%, 94% 0%, 100% 50%, 94% 100%, 6% 100%, 0% 50%);
+    box-shadow:0 16px 30px rgba(124,58,237,0.34);
+    white-space:nowrap;
+    transform-origin:50% 0%;
+    animation:ribbonSway 3.4s ease-in-out infinite;
+  }
+  @keyframes ribbonSway{
+    0%,100%{ transform:rotate(-5deg); }
+    50%{ transform:rotate(5deg); }
+  }
   .trophy-podium{
     display:flex; align-items:flex-end; justify-content:center;
-    gap:clamp(18px,3.8vw,60px); width:100%;
+    gap:clamp(18px,3.8vw,60px);
   }
   .trophy-slot{ display:flex; flex-direction:column; align-items:center; gap:clamp(8px,1.4vh,16px); }
   .trophy-slot.gold{ order:2; }
@@ -384,6 +405,7 @@
     .third-visual, .third-text, .third-text-mid{ flex:0 0 auto; padding-left:0; padding-right:0; }
     .third-text{ align-items:center; text-align:center; justify-content:center; }
     .win-grid{ grid-template-columns:1fr; }
+    .win-hero{ flex-direction:column; }
   }
 </style>
 </head>
@@ -556,7 +578,11 @@
       <div class="badge big pop">Step 7</div>
       <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">Results &amp; Bonuses</span></h1>
 
-      <div class="trophy-podium">
+      <div class="win-hero">
+        <div class="ribbon-wrap reveal-l" style="animation-delay:.05s">
+          <div class="ribbon">See Who Won</div>
+        </div>
+        <div class="trophy-podium">
         <div class="trophy-slot silver">
           <div class="trophy-wrap silver pop" style="animation-delay:.14s">
             <div class="trophy-glow silver"></div>
@@ -582,6 +608,7 @@
             <div class="trophy-sparkle s2">⭐</div>
           </div>
           <div class="medal-tag bronze">3rd Place</div>
+        </div>
         </div>
       </div>
 
@@ -615,7 +642,7 @@
       </div>
       <div class="third-text centered">
         <div class="badge big pop">Step 8</div>
-        <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">See Who Won</span></h1>
+        <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">Play Again or Take a Break</span></h1>
         <div class="bullets">
           <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Tap <em>"Play Again"</em> for a new game 🎉</div></div>
           <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Or tap <em>"Back to home"</em></div></div>
