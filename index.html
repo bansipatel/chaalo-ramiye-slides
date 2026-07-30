@@ -255,22 +255,37 @@
     width:100%; max-width:1700px; flex:1 1 auto; min-height:0;
     gap:clamp(20px,3.6vh,44px); text-align:center;
   }
-  .trophy-wrap{
-    position:relative; display:flex; align-items:center; justify-content:center;
-    width:clamp(150px,21vh,280px); height:clamp(150px,21vh,280px);
-    margin:clamp(4px,1vh,12px) 0;
+  .trophy-podium{
+    display:flex; align-items:flex-end; justify-content:center;
+    gap:clamp(18px,3.8vw,60px); width:100%;
   }
-  .trophy-glow{
-    position:absolute; inset:-32%;
-    background:radial-gradient(circle, rgba(250,204,21,0.55) 0%, rgba(250,204,21,0) 70%);
-    animation:trophyPulse 2.2s ease-in-out infinite;
-    border-radius:50%;
+  .trophy-slot{ display:flex; flex-direction:column; align-items:center; gap:clamp(8px,1.4vh,16px); }
+  .trophy-slot.gold{ order:2; }
+  .trophy-slot.silver{ order:1; }
+  .trophy-slot.bronze{ order:3; }
+  .medal-tag{
+    font-weight:900; letter-spacing:0.5px; color:var(--white);
+    padding:6px 20px; border-radius:999px; font-size:clamp(15px,1.7vw,22px);
+    box-shadow:0 8px 16px rgba(0,0,0,0.18);
   }
+  .medal-tag.gold{ background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%); }
+  .medal-tag.silver{ background:linear-gradient(135deg,#94A3B8 0%,#E2E8F0 100%); color:#334155; }
+  .medal-tag.bronze{ background:linear-gradient(135deg,#B45309 0%,#F59E0B 100%); }
+  .trophy-wrap{ position:relative; display:flex; align-items:center; justify-content:center; }
+  .trophy-wrap.gold{ width:clamp(160px,22vh,280px); height:clamp(160px,22vh,280px); }
+  .trophy-wrap.silver{ width:clamp(118px,16vh,204px); height:clamp(118px,16vh,204px); }
+  .trophy-wrap.bronze{ width:clamp(100px,13.5vh,172px); height:clamp(100px,13.5vh,172px); }
+  .trophy-glow{ position:absolute; inset:-32%; animation:trophyPulse 2.2s ease-in-out infinite; border-radius:50%; }
+  .trophy-glow.gold{ background:radial-gradient(circle, rgba(250,204,21,0.55) 0%, rgba(250,204,21,0) 70%); }
+  .trophy-glow.silver{ background:radial-gradient(circle, rgba(203,213,225,0.6) 0%, rgba(203,213,225,0) 70%); animation-delay:.25s; }
+  .trophy-glow.bronze{ background:radial-gradient(circle, rgba(217,119,6,0.5) 0%, rgba(217,119,6,0) 70%); animation-delay:.5s; }
   .trophy-emoji{
-    font-size:clamp(100px,18vh,220px); position:relative; z-index:1;
-    filter:drop-shadow(0 14px 22px rgba(124,58,237,0.35));
+    position:relative; z-index:1;
     animation:trophyBounce 2.2s var(--spring) infinite;
   }
+  .trophy-emoji.gold{ font-size:clamp(104px,18vh,220px); filter:drop-shadow(0 14px 22px rgba(124,58,237,0.35)); }
+  .trophy-emoji.silver{ font-size:clamp(78px,13vh,152px); filter:grayscale(0.85) brightness(1.3) contrast(0.95) drop-shadow(0 12px 18px rgba(100,116,139,0.35)); animation-delay:.15s; }
+  .trophy-emoji.bronze{ font-size:clamp(66px,11vh,132px); filter:sepia(0.65) saturate(2.4) hue-rotate(-20deg) brightness(0.85) contrast(1.05) drop-shadow(0 10px 16px rgba(146,64,14,0.35)); animation-delay:.3s; }
   @keyframes trophyPulse{
     0%,100%{ transform:scale(0.85); opacity:0.5; }
     50%{ transform:scale(1.18); opacity:1; }
@@ -279,7 +294,7 @@
     0%,100%{ transform:translateY(0) rotate(-3deg); }
     50%{ transform:translateY(-9%) rotate(3deg); }
   }
-  .trophy-sparkle{ position:absolute; font-size:clamp(24px,3.2vh,42px); animation:sparkleTwinkle 1.8s ease-in-out infinite; }
+  .trophy-sparkle{ position:absolute; font-size:clamp(18px,2.6vh,34px); animation:sparkleTwinkle 1.8s ease-in-out infinite; }
   .trophy-sparkle.s1{ top:4%; left:-8%; animation-delay:.1s; }
   .trophy-sparkle.s2{ bottom:8%; right:-10%; animation-delay:.5s; }
   .trophy-sparkle.s3{ top:-4%; right:8%; animation-delay:.9s; }
@@ -541,12 +556,33 @@
       <div class="badge big pop">Step 7</div>
       <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">Results &amp; Bonuses</span></h1>
 
-      <div class="trophy-wrap pop" style="animation-delay:.18s">
-        <div class="trophy-glow"></div>
-        <div class="trophy-emoji">🏆</div>
-        <div class="trophy-sparkle s1">✨</div>
-        <div class="trophy-sparkle s2">⭐</div>
-        <div class="trophy-sparkle s3">✨</div>
+      <div class="trophy-podium">
+        <div class="trophy-slot silver">
+          <div class="trophy-wrap silver pop" style="animation-delay:.14s">
+            <div class="trophy-glow silver"></div>
+            <div class="trophy-emoji silver">🏆</div>
+            <div class="trophy-sparkle s1">✨</div>
+          </div>
+          <div class="medal-tag silver">2nd Place</div>
+        </div>
+        <div class="trophy-slot gold">
+          <div class="trophy-wrap gold pop" style="animation-delay:.02s">
+            <div class="trophy-glow gold"></div>
+            <div class="trophy-emoji gold">🏆</div>
+            <div class="trophy-sparkle s1">✨</div>
+            <div class="trophy-sparkle s2">⭐</div>
+            <div class="trophy-sparkle s3">✨</div>
+          </div>
+          <div class="medal-tag gold">1st Place</div>
+        </div>
+        <div class="trophy-slot bronze">
+          <div class="trophy-wrap bronze pop" style="animation-delay:.26s">
+            <div class="trophy-glow bronze"></div>
+            <div class="trophy-emoji bronze">🏆</div>
+            <div class="trophy-sparkle s2">⭐</div>
+          </div>
+          <div class="medal-tag bronze">3rd Place</div>
+        </div>
       </div>
 
       <div class="win-grid">
@@ -581,9 +617,8 @@
         <div class="badge big pop">Step 8</div>
         <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">See Who Won</span></h1>
         <div class="bullets">
-          <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">See the final scores and the winner</div></div>
-          <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Tap <em>"Play Again"</em> for a new game 🎉</div></div>
-          <div class="b reveal-up" style="animation-delay:.62s"><div class="num">3</div><div class="txt">Or tap <em>"Back to home"</em></div></div>
+          <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Tap <em>"Play Again"</em> for a new game 🎉</div></div>
+          <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Or tap <em>"Back to home"</em></div></div>
         </div>
         <div class="cta-row reveal-up" style="animation-delay:.8s">
           <img src="assets/Sambandh-app-icon.png" alt="Sambandh app icon">
