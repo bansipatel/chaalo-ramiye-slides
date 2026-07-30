@@ -249,6 +249,79 @@
   .cta-row img{ width:clamp(64px,6.6vw,88px); height:clamp(64px,6.6vw,88px); border-radius:22%; filter:drop-shadow(0 8px 16px rgba(30,10,10,0.22)); margin-bottom:6px; }
   .cta-row .l1{ font-weight:700; color:#50241F; font-size:clamp(20px,2.3vw,27px); }
   .cta-row .l2{ font-weight:900; color:#941E05; font-size:clamp(26px,2.9vw,36px); }
+  /* ---- Step 7: trophy celebration (no phone mock, wide card grid instead) ---- */
+  .win-stack{
+    display:flex; flex-direction:column; align-items:center; justify-content:center;
+    width:100%; max-width:1500px; flex:1 1 auto; min-height:0;
+    gap:clamp(10px,1.7vh,20px); text-align:center;
+  }
+  .trophy-wrap{
+    position:relative; display:flex; align-items:center; justify-content:center;
+    width:clamp(110px,15vh,190px); height:clamp(110px,15vh,190px);
+    margin:clamp(2px,0.6vh,8px) 0;
+  }
+  .trophy-glow{
+    position:absolute; inset:-32%;
+    background:radial-gradient(circle, rgba(250,204,21,0.55) 0%, rgba(250,204,21,0) 70%);
+    animation:trophyPulse 2.2s ease-in-out infinite;
+    border-radius:50%;
+  }
+  .trophy-emoji{
+    font-size:clamp(74px,12.5vh,150px); position:relative; z-index:1;
+    filter:drop-shadow(0 14px 22px rgba(124,58,237,0.35));
+    animation:trophyBounce 2.2s var(--spring) infinite;
+  }
+  @keyframes trophyPulse{
+    0%,100%{ transform:scale(0.85); opacity:0.5; }
+    50%{ transform:scale(1.18); opacity:1; }
+  }
+  @keyframes trophyBounce{
+    0%,100%{ transform:translateY(0) rotate(-3deg); }
+    50%{ transform:translateY(-9%) rotate(3deg); }
+  }
+  .trophy-sparkle{ position:absolute; font-size:clamp(18px,2.4vh,30px); animation:sparkleTwinkle 1.8s ease-in-out infinite; }
+  .trophy-sparkle.s1{ top:4%; left:-8%; animation-delay:.1s; }
+  .trophy-sparkle.s2{ bottom:8%; right:-10%; animation-delay:.5s; }
+  .trophy-sparkle.s3{ top:-4%; right:8%; animation-delay:.9s; }
+  @keyframes sparkleTwinkle{
+    0%,100%{ opacity:0.2; transform:scale(0.7) rotate(0deg); }
+    50%{ opacity:1; transform:scale(1.15) rotate(15deg); }
+  }
+  .win-highlight{
+    font-weight:900; color:var(--purple-deep);
+    font-size:clamp(24px,3vw,38px);
+    background:linear-gradient(135deg, rgba(250,204,21,0.3) 0%, rgba(251,146,60,0.2) 100%);
+    border:2px solid rgba(250,204,21,0.6);
+    padding:clamp(8px,1.4vh,12px) clamp(20px,2.6vw,32px);
+    border-radius:999px;
+  }
+  .win-grid{
+    display:grid; grid-template-columns:repeat(2,minmax(280px,1fr));
+    gap:clamp(12px,1.8vh,20px) clamp(14px,2vw,26px);
+    width:100%;
+  }
+  .win-card{
+    display:flex; align-items:center; gap:clamp(10px,1.4vw,16px); text-align:left;
+    background:rgba(255,255,255,0.55);
+    border:1px solid rgba(124,58,237,0.16);
+    border-radius:22px;
+    padding:clamp(10px,1.5vh,16px) clamp(14px,2vw,20px);
+    box-shadow:0 10px 20px rgba(124,58,237,0.1);
+  }
+  .win-icon{
+    flex:0 0 auto; font-size:clamp(24px,2.6vw,32px);
+    width:clamp(44px,4.2vw,54px); height:clamp(44px,4.2vw,54px);
+    display:flex; align-items:center; justify-content:center;
+    border-radius:50%;
+    background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
+    box-shadow:0 6px 14px rgba(124,58,237,0.28);
+  }
+  .win-txt{
+    font-weight:700; color:var(--purple-deep);
+    font-size:clamp(16px,1.7vw,22px); line-height:1.28;
+  }
+  .win-txt em{ font-style:normal; color:var(--orange-deep); font-weight:900; }
+  .win-txt em.blue{ color:var(--blue-deep); }
   /* ---- group of 3 slide ---- */
   .trio{ display:flex; flex-direction:column; align-items:center; gap:clamp(20px,3vh,40px); }
   .trio-row{ display:flex; align-items:center; justify-content:center; gap:clamp(12px,1.8vw,28px); }
@@ -303,6 +376,7 @@
     .thirds{ flex-direction:column; gap:18px; }
     .third-visual, .third-text, .third-text-mid{ flex:0 0 auto; padding-left:0; padding-right:0; }
     .third-text{ align-items:center; text-align:center; justify-content:center; }
+    .win-grid{ grid-template-columns:1fr; }
   }
 </style>
 </head>
@@ -468,28 +542,46 @@
     </div>
   </section>
 
-  <!-- Slide 7: Winner / Play Again -->
+  <!-- Slide 7: Winner / Trophy Celebration -->
   <section class="slide" id="slide-7">
     <div class="confetti-host"></div>
-    <div class="thirds">
-      <div class="third-visual reveal-r" style="animation-delay:.24s">
-        <div class="phone"><img src="assets/IMG_3976.png" alt="Results screen"></div>
+    <div class="win-stack">
+      <div class="badge big pop">Step 7</div>
+      <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">See Who Won</span></h1>
+
+      <div class="trophy-wrap pop" style="animation-delay:.18s">
+        <div class="trophy-glow"></div>
+        <div class="trophy-emoji">🏆</div>
+        <div class="trophy-sparkle s1">✨</div>
+        <div class="trophy-sparkle s2">⭐</div>
+        <div class="trophy-sparkle s3">✨</div>
       </div>
-      <div class="third-text centered">
-        <div class="badge big pop">Step 7</div>
-        <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">See Who Won</span></h1>
-        <div class="bullets compact">
-          <div class="b reveal-up" style="animation-delay:.26s"><div class="num">🏆</div><div class="txt">See the final scores and the winner.</div></div>
-          <div class="b reveal-up" style="animation-delay:.38s"><div class="num">🌍</div><div class="txt">Earn the Mandal Rasbasta Bonus by playing across mandals.</div></div>
-          <div class="b reveal-up" style="animation-delay:.50s"><div class="num">🤝</div><div class="txt">Earn the Vadil Rasbasta Bonus by including a vadil (55+) in your trio.</div></div>
-          <div class="b reveal-up" style="animation-delay:.62s"><div class="num">🏅</div><div class="txt">Unlock a Mandal Badge for every distinct mandal you meet to earn bonus points.</div></div>
-          <div class="b reveal-up" style="animation-delay:.74s"><div class="num">🔄</div><div class="txt">Form a new trio each game to avoid the Comfort Zone Penalty.</div></div>
+
+      <div class="win-highlight reveal-up" style="animation-delay:.3s">See the final scores and the winner!</div>
+
+      <div class="win-grid">
+        <div class="win-card reveal-up" style="animation-delay:.42s">
+          <div class="win-icon">🌍</div>
+          <div class="win-txt"><em>Mandal Rasbasta Bonus</em> — earn it by playing across mandals</div>
         </div>
-        <div class="cta-row reveal-up" style="animation-delay:.9s">
-          <img src="assets/Sambandh-app-icon.png" alt="Sambandh app icon">
-          <div class="l1">Play exclusively now on the</div>
-          <div class="l2">Sambandh app</div>
+        <div class="win-card reveal-up" style="animation-delay:.52s">
+          <div class="win-icon">🤝</div>
+          <div class="win-txt"><em class="blue">Vadil Rasbasta Bonus</em> — include a vadil (55+) in your trio</div>
         </div>
+        <div class="win-card reveal-up" style="animation-delay:.62s">
+          <div class="win-icon">🏅</div>
+          <div class="win-txt"><em>Mandal Badge</em> — unlock one for every distinct mandal you meet</div>
+        </div>
+        <div class="win-card reveal-up" style="animation-delay:.72s">
+          <div class="win-icon">🔄</div>
+          <div class="win-txt"><em class="blue">Comfort Zone Penalty</em> — avoid it by forming a new trio each game</div>
+        </div>
+      </div>
+
+      <div class="cta-row reveal-up" style="animation-delay:.9s">
+        <img src="assets/Sambandh-app-icon.png" alt="Sambandh app icon">
+        <div class="l1">Play exclusively now on the</div>
+        <div class="l2">Sambandh app</div>
       </div>
     </div>
   </section>
