@@ -260,35 +260,21 @@
     gap:clamp(24px,4.4vw,64px); width:100%; flex-wrap:wrap;
   }
   .ribbon-wrap{ flex:0 0 auto; }
-  /* .ribbon rotates as one unit; .ribbon-back is a darker duplicate of the
-     same pennant, nudged and twisted a few degrees behind .ribbon-face, so
-     it peeks out at the tips and edges like a second folded layer of cloth */
   .ribbon{
     position:relative; display:inline-block;
     transform-origin:50% 50%;
     animation:ribbonSway 3.4s ease-in-out infinite;
   }
-  .ribbon-back{
-    position:absolute; inset:0; z-index:0;
-    background:linear-gradient(135deg, var(--purple-deep) 0%, var(--orange-deep) 100%);
-    clip-path:polygon(4% 0%, 96% 0%, 100% 50%, 96% 100%, 4% 100%, 0% 50%);
-    transform:translate(clamp(7px,1vw,13px), clamp(8px,1.4vh,14px)) rotate(-7deg);
-    filter:brightness(0.88);
-  }
+  /* forked/notched tail cut directly into the shape - the classic ribbon-banner silhouette */
   .ribbon-face{
-    position:relative; z-index:1; display:block;
-    background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
-    color:var(--white); font-weight:900; letter-spacing:0.5px;
-    font-size:clamp(22px,2.8vw,38px);
-    padding:clamp(16px,2.4vh,26px) clamp(40px,4.8vw,68px);
-    clip-path:polygon(4% 0%, 96% 0%, 100% 50%, 96% 100%, 4% 100%, 0% 50%);
-    box-shadow:inset 0 -4px 0 rgba(0,0,0,0.14), inset 0 3px 0 rgba(255,255,255,0.26), 0 18px 32px rgba(124,58,237,0.36);
+    position:relative; display:block;
+    background:linear-gradient(135deg, #7DD3FC 0%, #2563EB 100%);
+    color:var(--white); font-weight:900; letter-spacing:1px; text-transform:uppercase;
+    font-size:clamp(20px,2.6vw,34px);
+    padding:clamp(16px,2.4vh,26px) clamp(36px,4.4vw,60px);
+    clip-path:polygon(0% 0%, 100% 0%, 88% 50%, 100% 100%, 0% 100%, 12% 50%);
+    box-shadow:0 18px 32px rgba(37,99,235,0.38), inset 0 3px 0 rgba(255,255,255,0.32), inset 0 -4px 0 rgba(0,0,0,0.15);
     white-space:nowrap;
-  }
-  .ribbon-face::after{
-    content:''; position:absolute; inset:7px;
-    border:2px dashed rgba(255,255,255,0.55);
-    pointer-events:none;
   }
   @keyframes ribbonSway{
     0%,100%{ transform:rotate(-6deg); }
@@ -626,7 +612,6 @@
       <div class="win-hero">
         <div class="ribbon-wrap reveal-l" style="animation-delay:.05s">
           <div class="ribbon">
-            <div class="ribbon-back"></div>
             <div class="ribbon-face">See Who Won</div>
           </div>
         </div>
