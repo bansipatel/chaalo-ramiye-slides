@@ -260,21 +260,42 @@
     gap:clamp(24px,4.4vw,64px); width:100%; flex-wrap:wrap;
   }
   .ribbon-wrap{ flex:0 0 auto; }
+  /* outer .ribbon rotates as one unit and carries the folded-tail accents,
+     so the fold marks stay glued to the pointed tips as the ribbon sways;
+     the inner .ribbon-face carries the clip-path, so the clip never crops the tails */
   .ribbon{
     position:relative; display:inline-block;
+    transform-origin:50% 50%;
+    animation:ribbonSway 3.4s ease-in-out infinite;
+    filter:drop-shadow(0 16px 26px rgba(124,58,237,0.34));
+  }
+  .ribbon::before, .ribbon::after{
+    content:''; position:absolute; top:50%; width:0; height:0;
+    border-style:solid;
+  }
+  .ribbon::before{
+    left:-1px; transform:translateY(-50%);
+    border-width:clamp(9px,1.1vw,15px) clamp(9px,1.1vw,15px) clamp(9px,1.1vw,15px) 0;
+    border-color:transparent var(--purple-deep) transparent transparent;
+  }
+  .ribbon::after{
+    right:-1px; transform:translateY(-50%);
+    border-width:clamp(9px,1.1vw,15px) 0 clamp(9px,1.1vw,15px) clamp(9px,1.1vw,15px);
+    border-color:transparent transparent transparent var(--orange-deep);
+  }
+  .ribbon-face{
+    position:relative; display:block;
     background:linear-gradient(135deg, var(--purple) 0%, var(--orange) 100%);
     color:var(--white); font-weight:900; letter-spacing:0.5px;
     font-size:clamp(22px,2.8vw,38px);
-    padding:clamp(16px,2.4vh,26px) clamp(38px,4.6vw,64px);
-    clip-path:polygon(6% 0%, 94% 0%, 100% 50%, 94% 100%, 6% 100%, 0% 50%);
-    box-shadow:0 16px 30px rgba(124,58,237,0.34);
+    padding:clamp(16px,2.4vh,26px) clamp(40px,4.8vw,68px);
+    clip-path:polygon(4% 0%, 96% 0%, 100% 50%, 96% 100%, 4% 100%, 0% 50%);
+    box-shadow:inset 0 -4px 0 rgba(0,0,0,0.12), inset 0 3px 0 rgba(255,255,255,0.22);
     white-space:nowrap;
-    transform-origin:50% 0%;
-    animation:ribbonSway 3.4s ease-in-out infinite;
   }
   @keyframes ribbonSway{
-    0%,100%{ transform:rotate(-5deg); }
-    50%{ transform:rotate(5deg); }
+    0%,100%{ transform:rotate(-6deg); }
+    50%{ transform:rotate(6deg); }
   }
   .trophy-podium{
     display:flex; align-items:flex-end; justify-content:center;
@@ -350,6 +371,32 @@
   }
   .win-txt em{ font-style:normal; color:var(--orange-deep); font-weight:900; }
   .win-txt em.blue{ color:var(--blue-deep); }
+  /* ---- Step 8: play-again / take-a-break choice icons (no phone mock) ---- */
+  .choice-row{
+    display:flex; align-items:flex-start; justify-content:center;
+    gap:clamp(40px,7vw,140px); width:100%; flex-wrap:wrap;
+  }
+  .choice-card{ display:flex; flex-direction:column; align-items:center; gap:clamp(14px,2.2vh,26px); max-width:34ch; }
+  .choice-wrap{
+    position:relative; display:flex; align-items:center; justify-content:center;
+    width:clamp(140px,20vh,240px); height:clamp(140px,20vh,240px);
+  }
+  .choice-glow{ position:absolute; inset:-30%; border-radius:50%; animation:trophyPulse 2.2s ease-in-out infinite; }
+  .choice-glow.purple{ background:radial-gradient(circle, rgba(124,58,237,0.42) 0%, rgba(124,58,237,0) 70%); }
+  .choice-glow.orange{ background:radial-gradient(circle, rgba(251,146,60,0.42) 0%, rgba(251,146,60,0) 70%); animation-delay:.3s; }
+  .choice-icon{
+    position:relative; z-index:1; font-size:clamp(90px,15vh,180px);
+    filter:drop-shadow(0 14px 22px rgba(124,58,237,0.3));
+  }
+  .choice-icon.spin{ animation:iconSpin 2.6s linear infinite; }
+  .choice-icon.bob{ animation:trophyBounce 2.2s var(--spring) infinite; }
+  @keyframes iconSpin{ 0%{ transform:rotate(0deg); } 100%{ transform:rotate(360deg); } }
+  .choice-label{
+    font-weight:800; color:var(--purple-deep); text-align:center;
+    font-size:clamp(22px,2.6vw,34px); line-height:1.3;
+  }
+  .choice-label em{ font-style:normal; color:var(--orange-deep); font-weight:900; }
+  .choice-label em.blue{ color:var(--blue-deep); }
   /* ---- group of 3 slide ---- */
   .trio{ display:flex; flex-direction:column; align-items:center; gap:clamp(20px,3vh,40px); }
   .trio-row{ display:flex; align-items:center; justify-content:center; gap:clamp(12px,1.8vw,28px); }
@@ -406,6 +453,7 @@
     .third-text{ align-items:center; text-align:center; justify-content:center; }
     .win-grid{ grid-template-columns:1fr; }
     .win-hero{ flex-direction:column; }
+    .choice-row{ flex-direction:column; }
   }
 </style>
 </head>
@@ -580,7 +628,7 @@
 
       <div class="win-hero">
         <div class="ribbon-wrap reveal-l" style="animation-delay:.05s">
-          <div class="ribbon">See Who Won</div>
+          <div class="ribbon"><div class="ribbon-face">See Who Won</div></div>
         </div>
         <div class="trophy-podium">
         <div class="trophy-slot silver">
@@ -633,25 +681,34 @@
     </div>
   </section>
 
-  <!-- Slide 8: Winner / Play Again (duplicate of Step 7) -->
+  <!-- Slide 8: Play Again or Take a Break -->
   <section class="slide" id="slide-last">
     <div class="confetti-host"></div>
-    <div class="thirds">
-      <div class="third-visual reveal-r" style="animation-delay:.24s">
-        <div class="phone"><img src="assets/IMG_3976.png" alt="Results screen"></div>
+    <div class="win-stack">
+      <div class="badge big pop">Step 8</div>
+      <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">Play Again or Take a Break</span></h1>
+
+      <div class="choice-row">
+        <div class="choice-card reveal-l" style="animation-delay:.2s">
+          <div class="choice-wrap pop" style="animation-delay:.22s">
+            <div class="choice-glow purple"></div>
+            <div class="choice-icon spin">🔄</div>
+          </div>
+          <div class="choice-label">Tap <em>"Play Again"</em> for a new game 🎉</div>
+        </div>
+        <div class="choice-card reveal-r" style="animation-delay:.34s">
+          <div class="choice-wrap pop" style="animation-delay:.36s">
+            <div class="choice-glow orange"></div>
+            <div class="choice-icon bob">🏡</div>
+          </div>
+          <div class="choice-label">Or tap <em class="blue">"Back to home"</em></div>
+        </div>
       </div>
-      <div class="third-text centered">
-        <div class="badge big pop">Step 8</div>
-        <h1 class="title pop" style="animation-delay:.1s"><span class="title-inner">Play Again or Take a Break</span></h1>
-        <div class="bullets">
-          <div class="b reveal-up" style="animation-delay:.34s"><div class="num">1</div><div class="txt">Tap <em>"Play Again"</em> for a new game 🎉</div></div>
-          <div class="b reveal-up" style="animation-delay:.48s"><div class="num">2</div><div class="txt">Or tap <em>"Back to home"</em></div></div>
-        </div>
-        <div class="cta-row reveal-up" style="animation-delay:.8s">
-          <img src="assets/Sambandh-app-icon.png" alt="Sambandh app icon">
-          <div class="l1">Play exclusively now on the</div>
-          <div class="l2">Sambandh app</div>
-        </div>
+
+      <div class="cta-row reveal-up" style="animation-delay:.6s">
+        <img src="assets/Sambandh-app-icon.png" alt="Sambandh app icon">
+        <div class="l1">Play exclusively now on the</div>
+        <div class="l2">Sambandh app</div>
       </div>
     </div>
   </section>
